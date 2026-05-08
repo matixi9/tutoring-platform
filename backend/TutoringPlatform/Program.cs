@@ -36,9 +36,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    await DatabaseSeeder.SeedAsync(app.Services);
 }
 
 app.UseExceptionHandler();
