@@ -9,6 +9,6 @@ public class TutoringAd
     public required bool isOnline { get; set; }
     public required bool isAvailable { get; set; }
     
-    public required int Tutorid { get; set; }
+    public required int TutorId { get; set; }
     public User? Tutor { get; set; }
 }
