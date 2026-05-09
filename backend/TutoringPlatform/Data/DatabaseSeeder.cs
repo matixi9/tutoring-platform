@@ -11,7 +11,7 @@ public class DatabaseSeeder
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
-        
+
         await context.Database.MigrateAsync();
 
         if (await context.Users.AnyAsync())
@@ -61,7 +61,7 @@ public class DatabaseSeeder
                 Role = UserRole.Tutor
             }
         };
-        
+
         await context.Users.AddRangeAsync(testUsers);
         await context.SaveChangesAsync();
     }

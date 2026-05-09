@@ -6,7 +6,7 @@ namespace TutoringPlatform.Middleware;
 public class GlobalExceptionHandler : IExceptionHandler
 {
     private readonly ILogger<GlobalExceptionHandler> _logger;
-    
+
     public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
     {
         _logger = logger;
@@ -27,9 +27,9 @@ public class GlobalExceptionHandler : IExceptionHandler
         };
 
         context.Response.StatusCode = problemDetails.Status.Value;
-        
+
         await context.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
-        
+
         return true;
     }
 }

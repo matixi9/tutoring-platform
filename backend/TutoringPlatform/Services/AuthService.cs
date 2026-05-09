@@ -33,7 +33,7 @@ public class AuthService : IAuthService
     {
         if (await _context.Users.AnyAsync(u => u.Email == registerDto.Email))
             throw new Exception("Email already exists");
-        
+
         if (!Enum.TryParse<UserRole>(registerDto.Role, true, out var role))
             throw new Exception("Invalid role, must be either student or tutor");
 
@@ -44,17 +44,17 @@ public class AuthService : IAuthService
             Password = _passwordHasher.Hash(registerDto.Password),
             Role = role
         };
-        
+
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
-        
+
         return "User created successfully";
     }
-    
+
     public async Task<string> LoginAsync(LoginDto loginDto)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-        
+
         if (user == null || !_passwordHasher.Verify(loginDto.Password, user.Password))
             throw new Exception("Invalid email or password");
 
@@ -76,7 +76,7 @@ public class AuthService : IAuthService
             claims: claims,
             expires: DateTime.Now.AddHours(1),
             signingCredentials: credentials);
-        
+
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
