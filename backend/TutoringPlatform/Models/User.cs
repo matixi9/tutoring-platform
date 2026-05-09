@@ -7,4 +7,7 @@ public class User
     public required string Email { get; set; }
     public required string Password { get; set; }
     public UserRole Role { get; set; }
+    
+    public ICollection<TutoringAd> TutoringAds { get; set; } = new List<TutoringAd>();
+}   
 }
