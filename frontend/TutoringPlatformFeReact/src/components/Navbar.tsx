@@ -13,7 +13,9 @@ const Navbar = () => {
             </div> */}
 
             <div className="nav-right">
-                <button className="btn-secondary">Logowanie</button>
+                <Link to="/login" >
+                  <button className="btn-secondary">Logowanie</button>
+                </Link>
                 <button className="btn-primary">Dołącz jako tutor</button>
             </div>
         </nav>

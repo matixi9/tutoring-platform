@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Wrapper from '../components/Wrapper';
 import Home from '../pages/Home';
 import AuthGuard from './AuthGuard';
+import Login from '../components/Login';
 
 
 export const router = createBrowserRouter([
@@ -10,7 +11,7 @@ export const router = createBrowserRouter([
         element : <Wrapper />,
         children: [
             {path: "/", element: <Home/>},
-            // {path: "/login", element: <Login/>},
+            {path: "/login", element: <Login/>},
 
             {
                 element: <AuthGuard/>,
