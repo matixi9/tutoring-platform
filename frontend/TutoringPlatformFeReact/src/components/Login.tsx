@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-// import { apiFetch } from '../services/api';
+import { fetchData } from '../services/ApiService';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,18 +12,21 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-//     try {
-//       // Zakładamy, że backend zwraca obiekt { token: "..." }
-//       const data = await apiFetch<{ token: string }>('/auth/login', {
-//         method: 'POST',
-//         body: JSON.stringify({ email, password }),
-//       });
+    try {
+            const response = await fetchData<{ token: string }>('/Auth/login', {
+            method: 'POST',
+            body: { email, password }
+            });
 
-//       localStorage.setItem('token', data.token); // Zapisujemy bilet wstępu
-//       navigate('/'); // Wracamy na stronę główną
-//     } catch (err: any) {
-//       setError(err.message || 'Nieudane logowanie');
-//     }
+            localStorage.setItem('token', response.token);
+
+            navigate('/');
+
+        } catch (error : any) {
+            alert("Błąd logowania: " + error.message);
+        }
+
+
   };
 
   return (
