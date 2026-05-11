@@ -40,7 +40,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(e.Message);
+            return BadRequest(new { error = e.Message });
         }
     }
 
@@ -61,7 +61,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception e)
         {
-            return Unauthorized(e.Message);
+            return Unauthorized(new { error = e.Message });
         }
     }
 }

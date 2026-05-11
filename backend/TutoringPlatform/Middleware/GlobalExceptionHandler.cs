@@ -22,8 +22,8 @@ public class GlobalExceptionHandler : IExceptionHandler
         var problemDetails = new ProblemDetails
         {
             Status = StatusCodes.Status500InternalServerError,
-            Title = "Server error",
-            Detail = "Unexpected error occurred, try again later"
+            Title = "Błąd serwera",
+            Detail = "Wystąpił nieoczekiwany błąd, spróbuj ponownie później"
         };
 
         context.Response.StatusCode = problemDetails.Status.Value;

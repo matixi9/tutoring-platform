@@ -8,22 +8,22 @@ public class CreateTutoringAdDtoValidator : AbstractValidator<CreateTutoringAdDt
     public CreateTutoringAdDtoValidator()
     {
         RuleFor(x => x.Title)
-            .NotEmpty().WithMessage("Title is required")
-            .MaximumLength(50).WithMessage("Title must not exceed 50 characters");
+            .NotEmpty().WithMessage("Tytuł jest wymagany")
+            .MaximumLength(50).WithMessage("Tytuł nie może przekraczać 50 znaków");
         
         RuleFor(x => x.Description)
-            .NotEmpty().WithMessage("Description is required")
-            .MaximumLength(500).WithMessage("Description must not exceed 500 characters");
+            .NotEmpty().WithMessage("Opis jest wymagany")
+            .MaximumLength(500).WithMessage("Opis nie może przekraczać 500 znaków");
         
         RuleFor(x => x.Price)
-            .NotEmpty().WithMessage("Price is required")
-            .GreaterThan(0).WithMessage("Price must be greater than 0")
-            .LessThan(1000).WithMessage("Price must not exceed 1000");
+            .NotEmpty().WithMessage("Cena jest wymagana")
+            .GreaterThan(0).WithMessage("Cena musi być większa niż 0")
+            .LessThan(1000).WithMessage("Cena nie może przekraczać 1000zł");
 
         RuleFor(x => x.IsOnline)
-            .NotNull().WithMessage("Online status must be set");
+            .NotNull().WithMessage("Status online musi być określony");
 
         RuleFor(x => x.IsAvailable)
-            .NotNull().WithMessage("Availability status must be set");
+            .NotNull().WithMessage("Status dostępności musi być określony");
     }
 }

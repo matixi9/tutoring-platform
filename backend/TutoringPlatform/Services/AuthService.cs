@@ -32,10 +32,10 @@ public class AuthService : IAuthService
     public async Task<string> RegisterAsync(RegisterDto registerDto)
     {
         if (await _context.Users.AnyAsync(u => u.Email == registerDto.Email))
-            throw new Exception("Email already exists");
+            throw new Exception("Podany adres e-mail jest już zajęty");
 
         if (!Enum.TryParse<UserRole>(registerDto.Role, true, out var role))
-            throw new Exception("Invalid role, must be either student or tutor");
+            throw new Exception("Nieprawidłowa rola. Wybierz 'Student' lub 'Tutor'");
 
         var user = new User
         {
@@ -48,7 +48,7 @@ public class AuthService : IAuthService
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
 
-        return "User created successfully";
+        return "Konto zostało utworzone pomyślnie";
     }
 
     public async Task<string> LoginAsync(LoginDto loginDto)
@@ -56,9 +56,9 @@ public class AuthService : IAuthService
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
 
         if (user == null || !_passwordHasher.Verify(loginDto.Password, user.Password))
-            throw new Exception("Invalid email or password");
+            throw new Exception("Nieprawidłowy e-mail lub hasło");
 
-        var jwtKey = _configuration["Jwt:Key"] ?? throw new Exception("No JWT key found");
+        var jwtKey = _configuration["Jwt:Key"] ?? throw new Exception("Brak klucza JWT w konfiguracji serwera");
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 

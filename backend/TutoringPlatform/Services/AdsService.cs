@@ -95,7 +95,7 @@ public class AdsService : IAdsService
         await _context.SaveChangesAsync();
 
         return await GetByIdAsync(ad.Id) ??
-               throw new Exception("Error while creating ad");
+               throw new Exception("Wystąpił błąd podczas tworzenia ogłoszenia");
     }
 
 
@@ -109,7 +109,7 @@ public class AdsService : IAdsService
 
         if (ad.TutorId != tutorId)
         {
-            throw new Exception("You cannot update ad that is not yours");
+            throw new Exception("Nie możesz edytować ogłoszenia które nie jest twoje ");
         }
 
         ad.Title = dto.Title;
@@ -133,7 +133,7 @@ public class AdsService : IAdsService
 
         if (ad.TutorId != tutorId)
         {
-            throw new Exception("You cannot delete ad that is not yours");
+            throw new Exception("Nie możesz usunąć ogłoszenia które nie jest twoje");
         }
 
         _context.TutoringAds.Remove(ad);

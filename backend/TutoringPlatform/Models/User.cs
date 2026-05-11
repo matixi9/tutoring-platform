@@ -10,4 +10,3 @@ public class User
     
     public ICollection<TutoringAd> TutoringAds { get; set; } = new List<TutoringAd>();
 }   
-}

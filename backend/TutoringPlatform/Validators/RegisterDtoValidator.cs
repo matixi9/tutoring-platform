@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FluentValidation.Validators;
 using TutoringPlatform.DTOs;
 
 namespace TutoringPlatform.Validators;
@@ -9,19 +8,19 @@ public class RegisterDtoValidator : AbstractValidator<RegisterDto>
     public RegisterDtoValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required")
-            .EmailAddress().WithMessage("Invalid email format");
+            .NotEmpty().WithMessage("Adres e-mail jest wymagany")
+            .EmailAddress().WithMessage("Nieprawidłowy format adresu e-mail");
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password is required")
-            .MinimumLength(8).WithMessage("Password must be at least 8 characters long");
+            .NotEmpty().WithMessage("Hasło jest wymagane")
+            .MinimumLength(8).WithMessage("Hasło musi mieć co najmniej 8 znaków");
 
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Name is required");
+            .NotEmpty().WithMessage("Nazwa użytkownika jest wymagana");
 
         RuleFor(x => x.Role)
             .Must(role => role.Equals("student", StringComparison.OrdinalIgnoreCase) ||
                           role.Equals("Tutor", StringComparison.OrdinalIgnoreCase))
-            .WithMessage("Invalid role. Choose either 'Student' or 'Tutor'");
+            .WithMessage("Nieprawidłowa rola. Wybierz 'Student' lub 'Tutor'");
     }
 }

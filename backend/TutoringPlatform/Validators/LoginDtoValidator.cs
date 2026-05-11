@@ -8,10 +8,10 @@ public class LoginDtoValidator : AbstractValidator<LoginDto>
     public LoginDtoValidator()
     {
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required")
-            .EmailAddress().WithMessage("Invalid email format");
+            .NotEmpty().WithMessage("Adres e-mail jest wymagany")
+            .EmailAddress().WithMessage("Nieprawidłowy format adresu e-mail");
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password is required");
+            .NotEmpty().WithMessage("Hasło jest wymagane");
     }
 }
