@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+﻿using System.Security.Claims;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.JsonWebTokens;
 using TutoringPlatform.DTOs;
 using TutoringPlatform.Services;
 
@@ -53,7 +53,7 @@ public class AdsController : ControllerBase
             return BadRequest(new { errors });
         }
 
-        var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        var tutorIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (!int.TryParse(tutorIdString, out int tutorId))
             return Unauthorized(new { error = "Niewłaściwy token" });
 
@@ -72,7 +72,7 @@ public class AdsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateTutoringAdDto dto)
     {
-        var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        var tutorIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized(new { error = "Niewłaściwy token" });
 
         try
@@ -95,7 +95,7 @@ public class AdsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        var tutorIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized(new { error = "Niewłaściwy token" });
 
         try
