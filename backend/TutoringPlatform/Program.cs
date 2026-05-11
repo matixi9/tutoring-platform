@@ -48,7 +48,10 @@ builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddControllers();
 
+builder.Services.AddValidatorsFromAssemblyContaining<LoginDtoValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTutoringAdDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTutoringAdDtoValidator>();
 
 var app = builder.Build();
 
