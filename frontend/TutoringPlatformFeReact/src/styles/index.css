@@ -9,25 +9,35 @@
   --sans: sans-serif,'Inter', system-ui, -apple-system,;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
+  
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-dark);
   color: var(--text-p);
   font-family: var(--sans);
-  margin: 0;
+  overflow: hidden; 
 }
 
-body {
-  margin: 0;
-  background-color: var(--bg-dark);
+.app-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between; 
   align-items: center;           
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   background-color: var(--bg-dark);
   border-bottom: 1px solid var(--border);
   height: 64px;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .logo {
@@ -49,7 +59,7 @@ body {
 
 
 
-nav-links a {
+.nav-links a {
   color: var(--text-p);
   text-decoration: none;
   font-size: 0.95rem;
@@ -91,23 +101,127 @@ nav-links a {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   flex:1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 2rem;
   box-sizing: border-box;
+  font-family: sans-serif;
+  overflow-y: auto;
 }
 
 .footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 2rem;
+  padding: 0.25rem 2rem;
   text-align: center;
   background-color: var(--bg-dark);
+  flex-shrink: 0;
 }
 
 .footer-text {
   color: var(--text-p); 
   font-size: 0.85rem;
   letter-spacing: 0.5px;
+}
+
+
+
+/* --- FORMULARZE --- */
+.auth-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.auth-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.auth-subtitle {
+  color: var(--text-p);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-h);
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.auth-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.auth-footer {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-p);
+}
+
+.auth-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.error-message {
+  background-color: rgba(224, 108, 85, 0.1); 
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: shake 0.2s ease-in-out; 
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }

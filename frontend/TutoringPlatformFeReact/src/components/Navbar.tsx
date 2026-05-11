@@ -13,8 +13,12 @@ const Navbar = () => {
             </div> */}
 
             <div className="nav-right">
-                <button className="btn-secondary">Logowanie</button>
-                <button className="btn-primary">Dołącz jako tutor</button>
+                <Link to="/login" >
+                  <button className="btn-secondary">Logowanie</button>
+                </Link>
+                <Link to="/register">
+                    <button className="btn-primary">Dołącz jako tutor</button>
+                </Link>
             </div>
         </nav>
     );

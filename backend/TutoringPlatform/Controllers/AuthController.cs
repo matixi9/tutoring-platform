@@ -57,7 +57,7 @@ public class AuthController : ControllerBase
         try
         {
             var token = await _authService.LoginAsync(loginDto);
-            return Ok(token);
+            return Ok(new {token});
         }
         catch (Exception e)
         {
