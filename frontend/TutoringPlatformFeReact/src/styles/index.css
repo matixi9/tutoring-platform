@@ -9,25 +9,35 @@
   --sans: sans-serif,'Inter', system-ui, -apple-system,;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
+  
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-dark);
   color: var(--text-p);
   font-family: var(--sans);
-  margin: 0;
+  overflow: hidden; 
 }
 
-body {
-  margin: 0;
-  background-color: var(--bg-dark);
+.app-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between; 
   align-items: center;           
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   background-color: var(--bg-dark);
   border-bottom: 1px solid var(--border);
   height: 64px;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .logo {
@@ -49,7 +59,7 @@ body {
 
 
 
-nav-links a {
+.nav-links a {
   color: var(--text-p);
   text-decoration: none;
   font-size: 0.95rem;
@@ -91,20 +101,24 @@ nav-links a {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   flex:1;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 2rem;
   box-sizing: border-box;
   font-family: sans-serif;
+  overflow-y: auto;
 }
 
 .footer {
   border-top: 1px solid var(--border);
-  padding: 2.5rem 2rem;
+  padding: 0.25rem 2rem;
   text-align: center;
   background-color: var(--bg-dark);
+  flex-shrink: 0;
 }
 
 .footer-text {
@@ -117,10 +131,11 @@ nav-links a {
 
 /* --- FORMULARZE --- */
 .auth-container {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 4rem;
+  box-sizing: border-box;
 }
 
 .auth-card {
