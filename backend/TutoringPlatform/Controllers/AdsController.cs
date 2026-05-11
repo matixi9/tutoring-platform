@@ -36,7 +36,7 @@ public class AdsController : ControllerBase
         var ad = await _adsService.GetByIdAsync(id);
         if (ad == null)
         {
-            return NotFound(new { message = "No ad found" });
+            return NotFound(new { error = "Nie znaleziono ogłoszenia" });
         }
 
         return Ok(ad);
@@ -55,7 +55,7 @@ public class AdsController : ControllerBase
 
         var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         if (!int.TryParse(tutorIdString, out int tutorId))
-            return Unauthorized(new { error = "Wrong token" });
+            return Unauthorized(new { error = "Niewłaściwy token" });
 
         try
         {
@@ -73,14 +73,14 @@ public class AdsController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateTutoringAdDto dto)
     {
         var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized();
+        if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized(new { error = "Niewłaściwy token" });
 
         try
         {
             var success = await _adsService.UpdateAsync(id, dto, tutorId);
             if (!success)
             {
-                return NotFound(new { error = "No ad found" });
+                return NotFound(new { error = "Nie znaleziono ogłoszenia" });
             }
 
             return NoContent();
@@ -96,14 +96,14 @@ public class AdsController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var tutorIdString = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized();
+        if (!int.TryParse(tutorIdString, out int tutorId)) return Unauthorized(new { error = "Niewłaściwy token" });
 
         try
         {
             var success = await _adsService.DeleteAsync(id, tutorId);
             if (!success)
             {
-                return NotFound(new { error = "No ad found" });
+                return NotFound(new { error = "Nie znaleziono ogłoszenia" });
             }
 
             return NoContent();
