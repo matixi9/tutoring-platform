@@ -16,7 +16,6 @@ public class UpdateTutoringAdDtoValidator : AbstractValidator<UpdateTutoringAdDt
             .MaximumLength(500).WithMessage("Opis nie może przekraczać 500 znaków");
         
         RuleFor(x => x.Price)
-            .NotEmpty().WithMessage("Cena jest wymagana")
             .GreaterThan(0).WithMessage("Cena musi być większa niż 0")
             .LessThan(1000).WithMessage("Cena nie może przekraczać 1000zł");
 
