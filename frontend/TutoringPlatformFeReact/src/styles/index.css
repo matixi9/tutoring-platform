@@ -192,3 +192,21 @@ nav-links a {
   text-decoration: none;
   font-weight: 500;
 }
+
+.error-message {
+  background-color: rgba(224, 108, 85, 0.1); 
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  animation: shake 0.2s ease-in-out; 
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}

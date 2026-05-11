@@ -23,12 +23,18 @@ export async function fetchData<T>(endpoint : string, options : RequestOptions =
     
     const response = await fetch(`${baseURL}${endpoint}`, config);
 
-    let result = await response.json().catch(() => null);
 
-    if (!response.ok) {
-        const errorMessage = result?.message || `Błąd HTTP: ${response.status}`;
-        throw new Error(errorMessage);
+    if (response.ok) {
+        if (response.status === 204) return {} as T;
+        return await response.json();
     }
-    
-    return result as T;
+
+    const errorText = await response.text();
+
+    try {
+        const errorJson = JSON.parse(errorText);
+        throw new Error(errorJson.message || `Błąd HTTP: ${response.status}`);
+    } catch {
+        throw new Error(errorText || `Błąd HTTP: ${response.status}`);
+    }
 }

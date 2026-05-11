@@ -5,17 +5,19 @@ import { fetchData } from '../services/ApiService';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError(null);
+    setIsLoading(true);
 
     try {
             const response = await fetchData<{ token: string }>('/Auth/login', {
             method: 'POST',
-            body: { email, password }
+            body: { Email : email, Password : password }
             });
 
             localStorage.setItem('token', response.token);
@@ -23,7 +25,9 @@ const Login = () => {
             navigate('/');
 
         } catch (error : any) {
-            alert("Błąd logowania: " + error.message);
+            setError(error.message);
+        } finally{
+            setIsLoading(false);
         }
 
 
@@ -33,18 +37,20 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <h2>Logowanie do systemu</h2>
-        <p className="auth-subtitle">Zaloguj się do kredkorepetycje</p>
-
-        {error && <p style={{ color: 'var(--accent)', fontSize: '0.8rem' }}>{error}</p>}
+        <p className="auth-subtitle">Zaloguj się, aby móc przeglądać oferty bez ograniczeń!</p>
 
         <form onSubmit={handleSubmit}>
+            
           <div className="form-group">
             <label>Email</label>
             <input 
               type="email" 
               className="form-input" 
               value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError(null); 
+            }}
               required 
             />
           </div>
@@ -58,7 +64,19 @@ const Login = () => {
               required 
             />
           </div>
-          <button type="submit" className="btn-primary auth-button">Zaloguj się</button>
+
+
+        {error && (
+                <div className="error-message">
+                    {error}
+                </div>
+            )}
+        {error && <p style={{ color: 'var(--accent)', fontSize: '0.8rem' }}>{error}</p>}
+
+
+          <button type="submit" className="btn-primary auth-button" disabled={isLoading}>
+            {isLoading ? 'Logowanie...' : 'Zaloguj się'}
+          </button>
         </form>
 
         <div className="auth-footer">
