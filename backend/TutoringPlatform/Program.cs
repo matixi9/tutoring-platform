@@ -50,6 +50,9 @@ app.UseExceptionHandler();
 
 app.UseCors("AllowFrontend");
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseHttpsRedirection();
 
 app.MapControllers();
