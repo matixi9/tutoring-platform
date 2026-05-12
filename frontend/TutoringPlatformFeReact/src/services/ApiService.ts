@@ -24,25 +24,30 @@ export async function fetchData<T>(endpoint : string, options : RequestOptions =
     const response = await fetch(`${baseURL}${endpoint}`, config);
 
 
-    if (response.ok) {
-        if (response.status === 204) return {} as T;
-        return await response.json();
+    if (response.status === 204) return {} as T;
+
+    const responseText = await response.text();
+
+    if(!response.ok){
+        try {
+        const errorJson = JSON.parse(responseText);
+        let finalMessage = "";
+
+        if (errorJson.errors && Array.isArray(errorJson.errors)) {
+            finalMessage = errorJson.errors[0].errorMessage;
+        } else {
+            finalMessage = errorJson.error || errorJson.message || `Błąd: ${response.status}`;
+        }
+        throw new Error(finalMessage);
+    } catch (e: any) {
+        throw new Error(e.message || responseText || `Błąd HTTP: ${response.status}`);
+    }
     }
 
-    const errorText = await response.text();
-
-    try {
-    const errorJson = JSON.parse(errorText);
-    let finalMessage = "";
-
-    if (errorJson.errors && Array.isArray(errorJson.errors)) {
-        finalMessage = errorJson.errors[0].errorMessage;
-    } 
-    else {
-        finalMessage = errorJson.error || errorJson.message || `Błąd: ${response.status}`;
+    try{
+        return JSON.parse(responseText);
+    } catch {
+        return responseText as any;
     }
-    throw new Error(finalMessage);
-} catch (e: any) {
-    throw new Error(e.message || errorText || `Błąd HTTP: ${response.status}`);
-}
+
 };
