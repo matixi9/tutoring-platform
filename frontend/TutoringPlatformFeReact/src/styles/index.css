@@ -70,6 +70,8 @@ html, body {
   display: flex;
   gap: 12px;
   align-items: center;
+  text-decoration: none;
+  font-family: sans-serif;
 }
 
 .nav-links a:hover {
@@ -193,7 +195,6 @@ html, body {
 
 .auth-button {
   width: 100%;
-  margin-top: 1rem;
 }
 
 .auth-footer {
@@ -212,7 +213,11 @@ html, body {
   background-color: rgba(224, 108, 85, 0.1); 
   border: 1px solid var(--accent);
   color: var(--accent);
-  padding: 10px;
+  padding: 8px 12px;
+  max-width: 85%;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.4;
+  word-wrap: break-word;
   border-radius: 8px;
   font-size: 0.85rem;
   margin-bottom: 1.5rem;
