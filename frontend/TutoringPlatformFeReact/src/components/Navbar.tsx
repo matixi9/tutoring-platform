@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
-    return (
+        const { userName, logout, isAuthenticated } = useAuth();
+         
+        return (
         <nav className="navbar">
             <Link to="/" className="logo">
                 <span className="logo-k">k</span>
@@ -13,12 +16,22 @@ const Navbar = () => {
             </div> */}
 
             <div className="nav-right">
-                <Link to="/login" >
-                  <button className="btn-secondary">Logowanie</button>
-                </Link>
-                <Link to="/register">
-                    <button className="btn-primary">Dołącz jako tutor</button>
-                </Link>
+                {isAuthenticated ? (
+                    <>
+                    <span className="user-name">Witaj, {userName}!</span>
+                    <button onClick={logout} className="btn-secondary">
+                        Wyloguj
+                    </button>
+                    </>
+                ) : <>
+                    <Link to="/login" >
+                        <button className="btn-secondary">Logowanie</button>
+                    </Link>
+
+                    <Link to="/register?role=Tutor">
+                        <button className="btn-primary">Dołącz jako tutor</button>
+                    </Link>
+                </>}
             </div>
         </nav>
     );

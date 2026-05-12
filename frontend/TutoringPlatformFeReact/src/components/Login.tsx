@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchData } from '../services/ApiService';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,6 +9,8 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const {login, isAuthenticated} = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ const Login = () => {
             body: { Email : email, Password : password }
             });
 
-            localStorage.setItem('token', response.token);
+           login(response.token);
 
             navigate('/');
 
@@ -29,10 +32,13 @@ const Login = () => {
         } finally{
             setIsLoading(false);
         }
-
-
   };
 
+  useEffect(() => {
+    if (isAuthenticated) {
+        navigate('/'); 
+    }
+}, [isAuthenticated, navigate]);
   return (
     <div className="auth-container">
       <div className="auth-card">

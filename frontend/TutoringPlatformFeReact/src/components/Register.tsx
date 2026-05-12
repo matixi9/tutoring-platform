@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { fetchData } from "../services/ApiService";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [searchParams] = useSearchParams();
     
   const initialRole = searchParams.get('role') || 'Student';
+
+  const{isAuthenticated} = useAuth();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -40,6 +43,12 @@ const Register = () => {
       setFormData(prev => ({ ...prev, role: roleFromUrl }));
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+        navigate('/');
+    }
+}, [isAuthenticated, navigate]);
 
   return (
     <div className="auth-container">

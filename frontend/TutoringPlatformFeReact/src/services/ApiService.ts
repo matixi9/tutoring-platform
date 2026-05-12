@@ -32,9 +32,17 @@ export async function fetchData<T>(endpoint : string, options : RequestOptions =
     const errorText = await response.text();
 
     try {
-        const errorJson = JSON.parse(errorText);
-        throw new Error(errorJson.message || `Błąd HTTP: ${response.status}`);
-    } catch {
-        throw new Error(errorText || `Błąd HTTP: ${response.status}`);
+    const errorJson = JSON.parse(errorText);
+    let finalMessage = "";
+
+    if (errorJson.errors && Array.isArray(errorJson.errors)) {
+        finalMessage = errorJson.errors[0].errorMessage;
+    } 
+    else {
+        finalMessage = errorJson.error || errorJson.message || `Błąd: ${response.status}`;
     }
+    throw new Error(finalMessage);
+} catch (e: any) {
+    throw new Error(e.message || errorText || `Błąd HTTP: ${response.status}`);
 }
+};
