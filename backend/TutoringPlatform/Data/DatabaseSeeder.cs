@@ -86,7 +86,7 @@ public class DatabaseSeeder
                     new TutoringAd
                     {
                         Title = "Matematyka - Matura rozszerzona",
-                        Description = "Przygotowanie do matury z matematyki na poziomie rozszerzonym.",
+                        Description = "Przygotowanie do matury z matematyki na poziomie rozszerzonym.Jestem doświadczonym korepetytorem matematyki i skutecznie przygotowuję uczniów do matury rozszerzonej. Na zajęciach skupiamy się na pełnym zrozumieniu wymagań CKE oraz na nauce pisania rozwiązań ściśle pod klucz egzaminacyjny. Krok po kroku opanujemy najtrudniejsze zagadnienia, takie jak dowody matematyczne, zadania z parametrem oraz analizę matematyczną. Wyjaśniam skomplikowane schematy w prosty, logiczny sposób i uczę praktycznych strategii rozwiązywania arkuszy. Każdy uczeń otrzymuje ode mnie kompletne materiały dydaktyczne, autorskie zadania oraz pełne wsparcie na komunikatorze także między lekcjami. Pomagam przełamać stres przed egzaminem, systematycznie buduję pewność siebie i wspieram w walce o wynik powyżej 80 procent. Regularnie weryfikuję postępy za pomocą próbnych matur, aby precyzyjnie wyeliminować wszelkie braki wiedzy. Zajęcia prowadzę w bezstresowej, pełnej zaangażowania atmosferze, która motywuje do systematycznej pracy i myślenia analitycznego." ,
                         Price = 80,
                         IsOnline = true,
                         IsAvailable = true,

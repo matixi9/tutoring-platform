@@ -12,8 +12,8 @@ const AdCard = ({ad} : {ad : TutoringAd}) => {
             </div>
             <h3 className="ad-title">{ad.title}</h3>
             <p className="ad-description">
-                {ad.description.length > 100
-                    ? ad.description.substring(0, 100) + "..." 
+                {ad.description.length > 93
+                    ? ad.description.substring(0, 93) + "..." 
                     : ad.description}
             </p>
             <div className="ad-footer">
