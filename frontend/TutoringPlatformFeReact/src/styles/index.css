@@ -178,6 +178,7 @@ html, body {
 
 .form-input {
   width: 100%;
+  margin-top: 0.5rem;
   padding: 12px;
   background: var(--bg-dark);
   border: 1px solid var(--border);
@@ -247,3 +248,201 @@ html, body {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* Home ad-list-grid */
+
+.home-layout{
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.filters {
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: 16px;
+  position: sticky;
+  top: 1rem; 
+  box-shadow: var(--shadow);
+}
+
+.filters h3 {
+  margin-top: 0;
+  color: var(--text-h);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.filter-group {
+  margin-bottom: 1.2rem;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-p);
+}
+
+.filter-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-h);
+}
+
+.filter-group.checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent); 
+  cursor: pointer;
+}
+
+.filters .btn-primary {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 12px;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.filters .btn-secondary:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ads-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ad card */
+.ad-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.ad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  filter: brightness(1.05);
+}
+
+.ad-status {
+  margin-bottom: 1rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.badge-online {
+  background: rgba(52, 152, 219, 0.15);
+  color: #5dade2;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+  opacity: 90%;
+}
+
+.badge-local {
+  background: rgba(46, 204, 113, 0.15);
+  color: #58d68d;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  opacity: 70%;
+}
+
+.ad-description {
+  color: var(--text-p);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; 
+}
+
+.ad-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.ad-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ad-price {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+  opacity: 85%;
+}
+
+.ad-tutor {
+  color: var(--text-p);
+  font-size: 0.8rem;
+}
+
+/*przycisk adCard*/
+.btn-primary-sm {
+  background: transparent; 
+  color: var(--accent);    
+  border: 1px solid var(--accent);
+  padding: 7px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-sm:hover {
+  background: var(--accent); 
+  color: white;
+  box-shadow: 0 0 10px rgba(224, 108, 85, 0.3);
+  filter: brightness(0.75);
+}
+
+
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+  .filters {
+    width: 100%;
+    position: static;
+  }
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text-h);
+}
+
+
+

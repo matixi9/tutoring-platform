@@ -13,7 +13,7 @@ const Home = () => {
     const fetchAds = async () => {
         try{
             const params = new URLSearchParams();
-            if(search) params.append('search',search);
+            if(search) params.append('searchPhrase',search);
             if(onlyOnline) params.append('isOnline','true');
             if(maxPrice) params.append('maxPrice', maxPrice.toString());
 
@@ -25,11 +25,8 @@ const Home = () => {
     };
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            fetchAds();
-        },300);
-        return () => clearTimeout(timer);
-    }, [search, onlyOnline, maxPrice]);
+        fetchAds();
+    }, []);
 
 
     return (
@@ -53,10 +50,34 @@ const Home = () => {
                     <input type="checkbox" id="online" onChange={(e) => setOnlyOnline(e.target.checked)} />
                     <label htmlFor="online">Tylko online</label>
                 </div>
+
+                <button className="btn-primary auth-button" onClick={fetchAds}>
+                    Zastosuj filtry
+                </button>
+                
+                <button className="btn-secondary" 
+                        style={{marginTop: '10px', width: '100%'}}
+                        onClick={() => {
+                            setSearch('');
+                            setOnlyOnline(false);
+                            setMaxPrice('');
+        
+                        }}>
+                    Wyczyść
+                </button>
             </aside>
 
             <main className="ads-grid">
-                {ads.map(ad => <AdCard key={ad.id} ad={ad} />)}
+
+                {ads.length > 0 ? (
+                    ads.map(ad => <AdCard key={ad.id} ad={ad} />)
+                ) : (
+                    <div className="no-results">
+                        <p>Nie znaleźliśmy ogłoszeń spełniających Twoje kryteria.</p>
+                        <span style={{color: 'var(--text-p)'}}>Spróbuj zmienić filtry lub wyszukać inną frazę.</span>
+                    </div>
+                )}
+                    
             </main>
         </div>
     );
