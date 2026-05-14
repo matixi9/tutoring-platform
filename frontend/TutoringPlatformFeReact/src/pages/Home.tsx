@@ -3,6 +3,7 @@ import type { TutoringAd } from "../types/TutoringAds";
 import { fetchData } from "../services/ApiService";
 import AdCard from "../components/AdCard";
 import { useLocation } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 
 const Home = () => {
@@ -89,10 +90,7 @@ const Home = () => {
             <main className="ads-grid">
 
                 {loading ? (
-                    <div className="spinner-container">
-                         <div className="loading-spinner"></div>
-                         <p>Pobieranie ofert...</p>
-                    </div>
+                    <Spinner text="Pobieranie ofert..."/>
                 ) : ads.length > 0 ? (
                     ads.map(ad => <AdCard key={ad.id} ad={ad} />)
                 ) : (
