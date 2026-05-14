@@ -3,7 +3,6 @@ import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
         const { user, logout} = useAuth();
-         console.log(user)
         return (
         <nav className="navbar">
             <Link to="/" className="logo">

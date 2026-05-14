@@ -23,12 +23,14 @@ export const AuthProvider = ({ children }: {children : React.ReactNode}) => {
         try{
             const decoded : any = jwtDecode(token);
 
-            const userData : User = {
-                id: decoded.Id,
-                name: decoded.Name,
-                role: decoded.Role,
-            };
-            setUser(userData);
+    const userData: User = {
+      id: decoded.sub,
+      name: decoded.Name,
+      role: decoded.role || 
+            decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+    };
+    
+    setUser(userData);
         } catch (error: any){
             console.error("Błąd dekodowania tokena", error);
             logout();
