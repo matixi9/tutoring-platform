@@ -10,11 +10,11 @@ public class CreateTutoringAdDtoValidator : AbstractValidator<CreateTutoringAdDt
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Tytuł jest wymagany")
             .MaximumLength(50).WithMessage("Tytuł nie może przekraczać 50 znaków");
-        
+
         RuleFor(x => x.Description)
             .NotEmpty().WithMessage("Opis jest wymagany")
             .MaximumLength(500).WithMessage("Opis nie może przekraczać 500 znaków");
-        
+
         RuleFor(x => x.Price)
             .GreaterThan(0).WithMessage("Cena musi być większa niż 0")
             .LessThan(1000).WithMessage("Cena nie może przekraczać 1000zł");

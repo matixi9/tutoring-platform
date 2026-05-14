@@ -10,20 +10,25 @@ const Home = () => {
     const [search,setSearch] = useState('');
     const [onlyOnline, setOnlyOnline] = useState(false);
     const [maxPrice, setMaxPrice] = useState<number | ''>('');
+    const [loading, setLoading] = useState(false);
 
     const location = useLocation();
 
     const fetchAds = async () => {
+        setLoading(true);
+        const timer = new Promise(resolve => setTimeout(resolve, 325));
         try{
             const params = new URLSearchParams();
             if(search) params.append('searchPhrase',search);
             if(onlyOnline) params.append('isOnline','true');
             if(maxPrice) params.append('maxPrice', maxPrice.toString());
 
-            const data = await fetchData<TutoringAd[]>(`/Ads?${params.toString()}`);
+            const [data] = await Promise.all([fetchData<TutoringAd[]>(`/Ads?${params.toString()}`),timer]);  
             setAds(data);
         } catch (err){
             console.error("Błąd przy pobieraniu ofert: ", err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -41,7 +46,10 @@ const Home = () => {
         <div className="home-layout">
             <aside className="filters">
                 <h3>Filtry</h3>
+            <form onSubmit={(e) => { e.preventDefault(); fetchAds(); }}>
+
                 <div className="filter-group">
+                
                     <label>Szukaj</label>
                     <input type="text"
                             className="form-input" 
@@ -60,9 +68,11 @@ const Home = () => {
                     <label htmlFor="online">Tylko online</label>
                 </div>
 
-                <button className="btn-primary auth-button" onClick={fetchAds}>
+                <button className="btn-primary auth-button" onClick={fetchAds} type="submit">
                     Zastosuj filtry
                 </button>
+
+            </form>
                 
                 <button className="btn-secondary" 
                         style={{marginTop: '10px', width: '100%'}}
@@ -78,15 +88,19 @@ const Home = () => {
 
             <main className="ads-grid">
 
-                {ads.length > 0 ? (
+                {loading ? (
+                    <div className="spinner-container">
+                         <div className="loading-spinner"></div>
+                         <p>Pobieranie ofert...</p>
+                    </div>
+                ) : ads.length > 0 ? (
                     ads.map(ad => <AdCard key={ad.id} ad={ad} />)
                 ) : (
                     <div className="no-results">
                         <p>Nie znaleźliśmy ogłoszeń spełniających Twoje kryteria.</p>
                         <span style={{color: 'var(--text-p)'}}>Spróbuj zmienić filtry lub wyszukać inną frazę.</span>
                     </div>
-                )}
-                    
+             )}     
             </main>
         </div>
     );
