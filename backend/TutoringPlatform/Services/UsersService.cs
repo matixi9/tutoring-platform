@@ -30,7 +30,7 @@ public class UsersService : IUsersService
         return new UserProfileDto
         {
             Id = user.Id,
-            Name = user.Email,
+            Name = user.Name,
             Email = user.Email,
             Role = user.Role.ToString()
         };
