@@ -12,7 +12,7 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         modelBuilder.Entity<TutoringAd>()
             .HasOne(t => t.Tutor)
             .WithMany(t => t.TutoringAds)
@@ -20,6 +20,6 @@ public class ApplicationDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
     }
 
-    public DbSet<User> Users { get; set; }  
+    public DbSet<User> Users { get; set; }
     public DbSet<TutoringAd> TutoringAds { get; set; }
 }

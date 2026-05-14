@@ -8,7 +8,7 @@ public class TutoringAd
     public required int Price { get; set; }
     public required bool IsOnline { get; set; }
     public required bool IsAvailable { get; set; }
-    
+
     public required int TutorId { get; set; }
     public User? Tutor { get; set; }
 }
