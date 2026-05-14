@@ -55,9 +55,10 @@ const AddAdPage = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Opis (metody nauczania, doświadczenie itp.)</label>
+                    <label>Opis</label>
                     <textarea 
                         className="form-input"
+                        placeholder='metody nauczania, doświadczenie itp.'
                         style={{minHeight: '120px'}}
                         required
                         onChange={(e) => setFormData({...formData, description: e.target.value})}
@@ -69,6 +70,7 @@ const AddAdPage = () => {
                         <label htmlFor='price'>Cena (zł/h)</label>
                         <input 
                             type="number" 
+                            placeholder='np. 80'
                             className="form-input"
                             onChange={(e) => setFormData({...formData, price: Number(e.target.value)})}
                         />
@@ -84,7 +86,8 @@ const AddAdPage = () => {
                     </div>
                 </div>
 
-                <button type="submit" className="btn-primary" disabled={loading}>
+                <button type="submit" className="btn-primary" disabled={loading} style={{ display: 'block', margin: '0 auto' }}
+>
                     {loading ? 'Publikowanie...' : 'Opublikuj ofertę'}
                 </button>
 

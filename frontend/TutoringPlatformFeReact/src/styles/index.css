@@ -12,6 +12,13 @@
   
 }
 
+input, 
+textarea, 
+button, 
+select {
+    font-family: inherit;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -187,6 +194,7 @@ html, body {
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.2s;
+  resize: vertical;
 }
 
 .form-input:focus {
