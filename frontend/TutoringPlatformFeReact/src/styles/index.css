@@ -229,8 +229,10 @@ html, body {
 .success-message{
   background-color: rgba(46, 204, 113, 0.1); 
   border: 1px solid #2ecc71;
+  margin: 0 auto 1.5rem auto;
   max-width: 85%;
   color: #2ecc71;
+  word-wrap: break-word;
   padding: 10px;
   border-radius: 8px;
   font-size: 0.85rem;
