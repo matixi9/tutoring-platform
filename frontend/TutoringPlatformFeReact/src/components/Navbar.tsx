@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
-        const { userName, logout, isAuthenticated } = useAuth();
-         
+        const { user, logout} = useAuth();
         return (
         <nav className="navbar">
             <Link to="/" className="logo">
@@ -16,9 +15,14 @@ const Navbar = () => {
             </div> */}
 
             <div className="nav-right">
-                {isAuthenticated ? (
+                {user?.role === 'Tutor' && (
+                    <Link to="/addAd">
+                        <button className="btn-secondary">Dodaj ogłoszenie</button>
+                    </Link>
+                )}
+                {!!user ? (
                     <>
-                    <span className="user-name">Witaj, {userName}!</span>
+                    <span className="user-name">Witaj, {user.name}!</span>
                     <button onClick={logout} className="btn-secondary">
                         Wyloguj
                     </button>

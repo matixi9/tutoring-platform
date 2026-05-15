@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import AuthGuard from './AuthGuard';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import AddAdPage from '../pages/AddAdPage';
 
 
 export const router = createBrowserRouter([
@@ -17,13 +18,24 @@ export const router = createBrowserRouter([
             {
                 element: <AuthGuard/>,
                 children: [
-                    // {path : "/moje-lekcje", element: <MyLessons />},
-                    // { path: "/dodaj-ogloszenie", element: <CreateOffer /> },
-                    // { path: "/profil", element: <Profile /> },
+                    // { path: "/me", element: <Profile /> },
                 ]
 
-            }
+            },
+            { 
+                element: <AuthGuard allowedRoles={['Tutor']}/>,
+                children: [
+                    { path: "/addAd", element: <AddAdPage /> },
+                    // { path: "/myOffers", element: <MyOffers /> },
+                ]
 
+            },
+            {
+                element: <AuthGuard allowedRoles={['Student']} />, 
+                children: [
+                    // { path: "/myLessons", element: <MyLessons /> },
+                ]
+            }
         ],
     },
 ]);

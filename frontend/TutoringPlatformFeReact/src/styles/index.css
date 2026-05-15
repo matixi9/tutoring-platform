@@ -12,6 +12,13 @@
   
 }
 
+input, 
+textarea, 
+button, 
+select {
+    font-family: inherit;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -187,6 +194,7 @@ html, body {
   font-size: 1rem;
   box-sizing: border-box;
   transition: border-color 0.2s;
+  resize: vertical;
 }
 
 .form-input:focus {
@@ -229,8 +237,10 @@ html, body {
 .success-message{
   background-color: rgba(46, 204, 113, 0.1); 
   border: 1px solid #2ecc71;
+  margin: 0 auto 1.5rem auto;
   max-width: 85%;
   color: #2ecc71;
+  word-wrap: break-word;
   padding: 10px;
   border-radius: 8px;
   font-size: 0.85rem;
