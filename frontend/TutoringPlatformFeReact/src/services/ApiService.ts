@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 const baseURL = "http://localhost:5192/api";
 
 interface RequestOptions extends RequestInit{
@@ -29,19 +31,42 @@ export async function fetchData<T>(endpoint : string, options : RequestOptions =
     const responseText = await response.text();
 
     if(!response.ok){
+
+        let finalMessage = "Błąd: ";
+
         try {
         const errorJson = JSON.parse(responseText);
-        let finalMessage = "";
 
         if (errorJson.errors && Array.isArray(errorJson.errors)) {
             finalMessage = errorJson.errors[0].errorMessage;
         } else {
             finalMessage = errorJson.error || errorJson.message || `Błąd: ${response.status}`;
         }
-        throw new Error(finalMessage);
-    } catch (e: any) {
-        throw new Error(e.message || responseText || `Błąd HTTP: ${response.status}`);
+    } catch{
+        finalMessage = (responseText || `Błąd HTTP: ${response.status}`);
     }
+
+        switch(response.status){
+            case 400: 
+                toast.error(`Błędne dane: ${finalMessage}!`)
+                break;
+            case 401:
+                if(localStorage.getItem('token')){
+                    toast.error("Sesja wygasła. Zaloguj się ponownie.");
+                    localStorage.removeItem('token');
+                }else toast.error("Błędny login, spróbuj jeszcze raz")
+                break;
+            case 403:
+                toast.error("Nie masz uprawnień do tej akcji.");
+                break;
+            case 500:
+                toast.error("Błąd serwera. Spróbuj później.");
+                break;
+            default:
+                toast.error(finalMessage);
+        }
+
+        throw new Error(finalMessage);
     }
 
     try{
