@@ -15,7 +15,7 @@ public class Lesson
     public required int TutoringAdId { get; set; }
     public TutoringAd? TutoringAd { get; set; }
     
-    public required int TutorAvailibilityId { get; set; }
-    public TutorAvailibility? TutorAvailibility { get; set; }
+    public required int TutorAvailabilityId { get; set; }
+    public TutorAvailibility? TutorAvailability { get; set; }
     
 }
