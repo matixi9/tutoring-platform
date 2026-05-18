@@ -30,9 +30,16 @@ public class ApplicationDbContext : DbContext
             .WithMany(u => u.BookedLessons)
             .HasForeignKey(u => u.StudentId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<TutorAvailability>()
+            .HasOne(t => t.TutoringAd)
+            .WithMany(t => t.TutorAvailabilities)
+            .HasForeignKey(t => t.TutoringAdId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     public DbSet<User> Users { get; set; }
     public DbSet<TutoringAd> TutoringAds { get; set; }
     public DbSet<Lesson> Lessons { get; set; }
+    public DbSet<TutorAvailability> TutorAvailabilities { get; set; }
 }
