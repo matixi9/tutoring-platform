@@ -33,7 +33,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link to="/register?role=Tutor">
-                        <button className="btn-primary">Dołącz jako tutor</button>
+                        <button className="btn-primary">Dołącz jako korepetytor</button>
                     </Link>
                 </>}
             </div>

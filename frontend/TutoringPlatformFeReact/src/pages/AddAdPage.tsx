@@ -41,9 +41,6 @@ const AddAdPage = () => {
                 <h2>Opublikuj ogłoszenie</h2>
                 <p>Przedstaw swoją ofertę nauczania.</p>
 
-                {success && <div className="success-message">Ogłoszenie dodane pomyślnie!</div>}
-                {error && <div className="error-message">{error}</div>}
-
                 <div className='form-group'>
                     <label>Tytuł ogłoszenia</label>
                     <input 
@@ -85,6 +82,9 @@ const AddAdPage = () => {
                         <label htmlFor="isOnline">Lekcje Online</label>
                     </div>
                 </div>
+
+                {success && <div className="success-message">Ogłoszenie dodane pomyślnie!</div>}
+                {error && <div className="error-message">{error}</div>}
 
                 <button type="submit" className="btn-primary" disabled={loading} style={{ display: 'block', margin: '0 auto' }}
 >

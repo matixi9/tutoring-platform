@@ -5,6 +5,7 @@ import AuthGuard from './AuthGuard';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AddAdPage from '../pages/AddAdPage';
+import NotFound from '../pages/NotFound';
 
 
 export const router = createBrowserRouter([
@@ -12,9 +13,13 @@ export const router = createBrowserRouter([
         path: "/",
         element : <Wrapper />,
         children: [
+
             {path: "/", element: <Home/>},
             {path: "/login", element: <Login/>},
             {path: "/register", element: <Register/> },
+
+            {path: "*", element: <NotFound/>},
+
             {
                 element: <AuthGuard/>,
                 children: [

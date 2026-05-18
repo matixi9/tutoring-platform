@@ -481,5 +481,18 @@ html, body {
     100% { transform: rotate(360deg); }
 }
 
+/* toaster */
+.react-hot-toast {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(8px);  
+  min-width: 300px;
+}
 
+@keyframes toastEnter {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 
+.react-hot-toast b {
+  font-weight: 600;
+}
