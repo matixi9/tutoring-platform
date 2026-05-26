@@ -48,17 +48,19 @@ public class TutorAvailabilitiesService : ITutorAvailabilitiesService
             throw new UnauthorizedAccessException("Nie możesz zarządzać grafikiem tego ogłoszenia.");
         }
 
-        if (dto.StartTime >= dto.EndTime)
-        {
-            throw new InvalidOperationException("Godzina rozpoczęcia musi być wcześniejsza niż godzina zakończenia.");
-        }
+        var calculatedEndTime = dto.StartTime.Add(TimeSpan.FromHours(1));
 
+        if (calculatedEndTime.Days > 0)
+        {
+            throw new InvalidOperationException("Lekcja nie może kończyć się kolejnego dnia");
+        }
+        
         var availability = new TutorAvailability
         {
             TutoringAdId = adId,
             DayOfWeek = dto.DayOfWeek,
             StartTime = dto.StartTime,
-            EndTime = dto.EndTime
+            EndTime = calculatedEndTime
         };
 
         _context.TutorAvailabilities.Add(availability);
